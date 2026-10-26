@@ -1,0 +1,249 @@
+/* =====================================================================
+   MI PROYECTO PERSONAL — style.css
+   Escrito MOBILE-FIRST: todo lo que ves antes de la primera @media
+   es lo que ve un celular. Cada @media de acá abajo SUMA o CAMBIA
+   estilos a partir de cierto ancho — nunca al revés.
+   ===================================================================== */
+
+/* ---------- 1. Variables (Nivel 22: acá centralizamos colores y
+   tamaños para no repetirlos por todo el archivo) ---------- */
+:root {
+  --color-fondo: #FAF9F6;
+  --color-texto: #22262B;
+  --color-primario: #1F5C56;
+  --color-primario-claro: #E4EFED;
+  --color-acento: #D97B4F;
+  --color-borde: #E3E1DA;
+
+  --fuente-base: 'Segoe UI', system-ui, sans-serif;
+
+  --espaciado: 16px;
+  --radio: 8px;
+}
+
+/* ---------- 2. Reset simple ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+img { max-width: 100%; display: block; }
+
+/* Nivel 24: nunca quites el foco de teclado, es accesibilidad básica */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--color-acento);
+  outline-offset: 2px;
+}
+
+body {
+  font-family: var(--fuente-base);
+  color: var(--color-texto);
+  background: var(--color-fondo);
+  line-height: 1.55;
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--espaciado);
+}
+
+h1, h2, h3 { line-height: 1.2; margin-bottom: 0.6em; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.1rem; }
+p { margin-bottom: 1em; }
+
+.accent { color: var(--color-acento); }
+
+.btn {
+  display: inline-block;
+  background: var(--color-primario);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 14px 22px;      /* Nivel 13: padding generoso = área táctil cómoda */
+  border: none;
+  border-radius: var(--radio);
+  cursor: pointer;
+  font-size: 1rem;
+}
+.btn:hover { opacity: 0.9; }
+
+section { padding: 48px 0; }
+
+/* ---------- 3. Header y navegación (mobile: menú oculto + hamburguesa) ---------- */
+.site-header {
+  border-bottom: 1px solid var(--color-borde);
+  background: var(--color-fondo);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.logo {
+  font-weight: 700;
+  color: var(--color-primario);
+  text-decoration: none;
+  font-size: 1.05rem;
+}
+
+/* Botón hamburguesa: 44x44px mínimo (Nivel 24) */
+.nav-toggle {
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+.nav-toggle span {
+  width: 24px;
+  height: 2px;
+  background: var(--color-texto);
+}
+
+/* En mobile el menú está oculto hasta que se abre con el botón */
+.main-nav { display: none; width: 100%; }
+.main-nav.abierto { display: block; }
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;   /* Nivel 12: columna en mobile */
+  gap: 4px;
+  padding: 12px 0;
+}
+.main-nav a {
+  display: block;
+  padding: 12px 4px;        /* área táctil cómoda para el dedo */
+  color: var(--color-texto);
+  text-decoration: none;
+  font-weight: 500;
+}
+.main-nav a:hover { color: var(--color-primario); }
+
+/* ---------- 4. Hero ---------- */
+.hero { padding: 56px 0; }
+.hero h1 { font-size: 1.8rem; }
+.hero .lead { font-size: 1.05rem; max-width: 46ch; }
+
+/* ---------- 5. Sobre mí ---------- */
+.sobre-mi p { max-width: 65ch; }
+
+/* ---------- 6. Proyectos (Nivel 15: Grid, 1 columna en mobile) ---------- */
+.grid-proyectos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.tarjeta-proyecto {
+  background: white;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  padding: var(--espaciado);
+}
+
+.tarjeta-imagen {
+  background: var(--color-primario-claro); /* */
+  color: var(--color-primario);             /* */
+  border-radius: var(--radio);              /* */
+  margin-bottom: 12px;                      /* */
+  
+  /* ADD THESE NEW PROPERTIES: */
+  overflow: hidden;         /* Ensures nothing escapes the card borders */
+  display: block;           /* Allows standard block layout for inner image */
+  width: 100%;              /* Stretches to the full card width */
+}
+.tarjeta-imagen img {
+  width: 100%;
+  height: 140px;            /* Matches your original targeted image height */
+  object-fit: cover;        /* Crucial: clips/crops image beautifully instead of stretching */
+  object-position: center;  /* Centers your artwork frame */
+  display: block;           /* Removes default baseline inline gaps */
+}
+
+.link-proyecto {
+  color: var(--color-primario);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ---------- 7. Formulario de contacto (Nivel 17) ---------- */
+.formulario-contacto { max-width: 480px; }
+.campo { margin-bottom: 18px; display: flex; flex-direction: column; gap: 6px; }
+.campo label { font-weight: 600; font-size: 0.92rem; }
+.campo input,
+.campo textarea {
+  font: inherit;
+  padding: 12px;             /* área táctil cómoda (Nivel 24) */
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  background: white;
+}
+
+/* ---------- 8. Footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--color-borde);
+  padding: 24px 0;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+
+/* =====================================================================
+   BREAKPOINTS — mobile-first (Niveles 16, 19, 20 y 21)
+   Regla de la casa: SIEMPRE min-width, SIEMPRE de menor a mayor.
+   ===================================================================== */
+
+/* ---------- TABLET: desde 600px ---------- */
+@media (min-width: 600px) {
+
+  .nav-toggle { display: none; }         /* ya no hace falta hamburguesa */
+
+  .main-nav { display: block; width: auto; }
+  .main-nav ul {
+    flex-direction: row;                 /* Nivel 12: de columna a fila */
+    gap: 22px;
+    padding: 0;
+  }
+  .main-nav a { padding: 8px 4px; }
+
+  .hero h1 { font-size: 2.3rem; }
+
+  .grid-proyectos {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+  }
+}
+
+/* ---------- ESCRITORIO: desde 1024px ---------- */
+@media (min-width: 1024px) {
+
+  section { padding: 72px 0; }
+
+  .hero-inner { max-width: 640px; }
+  .hero h1 { font-size: 2.8rem; }
+
+  .grid-proyectos {
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+    gap: 28px;
+  }
+}
+
+/* ---------- Pantalla horizontal chica (Nivel 23): ajustá el hero
+   si el celular está acostado, para que no ocupe toda la altura ---------- */
+@media (orientation: landscape) and (max-width: 900px) {
+  .hero { padding: 32px 0; }
+}
